@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Expo from 'expo';
 
 export default class App extends React.Component<{}> {
   render() {
+    Expo.ImagePicker.launchCameraAsync();
     return (
       <View style={styles.container}>
         <Text>Open up App.ts to start working on your app!</Text>

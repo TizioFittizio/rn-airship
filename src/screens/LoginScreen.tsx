@@ -1,33 +1,34 @@
 import * as React from 'react';
 import { Text, Container, Content, Item, Input, View, Button } from 'native-base';
-import { StyleSheet, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { ViewStyle, TextStyle } from 'react-native';
 
 class LoginScreen extends React.Component<{}>{
 
     render() {
         return (
             <Container>
-                <Content padder contentContainerStyle={styles.containerStyle}>
+                <Content padder contentContainerStyle={containerStyle}>
 
-                    <View style={styles.containerViewStyle}>
-                        <Text style={styles.titleStyle}>React Native Airship</Text>
+                    <View style={containerViewStyle}>
+                        <Text style={titleStyle}>React Native Airship</Text>
                     </View>
 
-                    <View style={styles.containerViewStyle}>
-                        <View style={styles.formStyle}>
-                            <Item rounded style={styles.itemStyle}>
-                                <Input style={styles.inputStyle} keyboardType='email-address' placeholder="Email" />
+                    <View style={containerViewStyle}>
+                        <View style={formStyle}>
+                            <Item rounded style={itemStyle}>
+                                <Input keyboardType='email-address' placeholder="Email" />
                             </Item>
-                            <Item rounded style={styles.itemStyle}>
-                                <Input style={styles.inputStyle} placeholder="Password" blurOnSubmit secureTextEntry />
+                            <Item rounded style={itemStyle}>
+                                <Input placeholder="Password" blurOnSubmit secureTextEntry />
                             </Item>
-                            <Button bordered rounded warning style={styles.buttonStyle}>
+                            <Button bordered rounded style={buttonStyle}>
                                 <Text>Login</Text>
                             </Button>
                         </View>
                     </View>
 
-                    <View style={styles.containerViewStyle}>
+                    <View style={containerViewStyle}>
+                        <Text>Social Login Here</Text>
                     </View>
 
                 </Content>
@@ -37,40 +38,34 @@ class LoginScreen extends React.Component<{}>{
     }
 }
 
-const styles = StyleSheet.create({
-    containerStyle: {
-        flexDirection: 'column',
-        flex: 1,
-        backgroundColor: 'black'
-    },
-    containerViewStyle: {
-        justifyContent: 'space-around',
-        flexDirection: 'column',
-        flex: 1
-    },
-    titleStyle: {
-        flexDirection: 'row',
-        alignSelf: 'center',
-        fontSize: 30,
-        color: 'white'
-    },
-    formStyle: {
-        paddingRight: 10,
-        paddingLeft: 10
-    },
-    itemStyle: {
-        margin: 5,
-        paddingLeft: 15
-    },
-    inputStyle: {
-        textDecorationColor: 'white',
-        color: 'white'
-    },
-    buttonStyle: {
-        marginTop: 5,
-        flexDirection: 'row',
-        alignSelf: 'center'
-    }
-})
+
+const containerStyle: ViewStyle = {
+    flexDirection: 'column',
+    flex: 1,
+};
+const containerViewStyle: ViewStyle = {
+    justifyContent: 'space-around',
+    flexDirection: 'column',
+    flex: 1
+};
+const titleStyle: TextStyle = {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    fontSize: 30,
+};
+const formStyle = {
+    paddingRight: 10,
+    paddingLeft: 10
+};
+const itemStyle = {
+    margin: 5,
+    paddingLeft: 15
+};
+const buttonStyle: ViewStyle = {
+    marginTop: 5,
+    flexDirection: 'row',
+    alignSelf: 'center'
+}
+
 
 export default LoginScreen;

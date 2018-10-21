@@ -1,10 +1,32 @@
 import * as React from 'react';
 import { Text, Container, Content, Item, Input, View, Button } from 'native-base';
 import { ViewStyle, TextStyle } from 'react-native';
+import { connect } from 'react-redux';
+import { ReducersState } from '../reducers';
+import { loginAction, LoginActionType } from '../actions';
 
-class LoginScreen extends React.Component<{}>{
+interface Props {
+    loginAction?: LoginActionType;
+    authenticating: boolean;
+}
+
+interface State {
+    email: string;
+    password: string;
+}
+
+class LoginScreen extends React.Component<Props, State>{
+
+    constructor(props: Props){
+        super(props);
+        this.state = {
+            email: '',
+            password: ''
+        };
+    }
 
     render() {
+        const { email, password } = this.state;
         return (
             <Container>
                 <Content padder contentContainerStyle={containerStyle}>
@@ -16,12 +38,26 @@ class LoginScreen extends React.Component<{}>{
                     <View style={containerViewStyle}>
                         <View style={formStyle}>
                             <Item rounded style={itemStyle}>
-                                <Input keyboardType='email-address' placeholder="Email" />
+                                <Input
+                                    value={email}
+                                    onChangeText={email => this.setState({email})}
+                                    keyboardType='email-address' 
+                                    placeholder="Email" />
                             </Item>
                             <Item rounded style={itemStyle}>
-                                <Input placeholder="Password" blurOnSubmit secureTextEntry />
+                                <Input
+                                    value={password}
+                                    onChangeText={password => this.setState({password})} 
+                                    placeholder="Password" 
+                                    blurOnSubmit 
+                                    secureTextEntry />
                             </Item>
-                            <Button bordered rounded style={buttonStyle}>
+                            <Button
+                                disabled={this.props.authenticating} 
+                                bordered 
+                                rounded 
+                                style={buttonStyle} 
+                                onPress={() => this.props.loginAction!()}>
                                 <Text>Login</Text>
                             </Button>
                         </View>
@@ -33,11 +69,9 @@ class LoginScreen extends React.Component<{}>{
 
                 </Content>
             </Container>
-
         )
     }
 }
-
 
 const containerStyle: ViewStyle = {
     flexDirection: 'column',
@@ -67,5 +101,13 @@ const buttonStyle: ViewStyle = {
     alignSelf: 'center'
 }
 
+const mapStateToProps = (state: ReducersState): Props => {
+    const { authenticating } = state.auth;
+    console.warn(authenticating);
+    return {
+        authenticating
+    };
+}
 
-export default LoginScreen;
+
+export default connect(mapStateToProps, {loginAction})(LoginScreen);

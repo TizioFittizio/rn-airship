@@ -2,6 +2,8 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Expo from 'expo';
 import { MainNavigator } from './src/config/MainNavigator';
+import { Provider } from 'react-redux';
+import { store } from './src/store';
 
 interface State {
   ready: boolean;
@@ -30,9 +32,9 @@ export default class App extends React.Component<null, State> {
 
   renderReady = () => {
     return (
-      <MainNavigator>
-
-      </MainNavigator>
+      <Provider store={store}>
+        <MainNavigator/>
+      </Provider>
     );
   }
 }
